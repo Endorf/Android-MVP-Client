@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'kotlin-android'
     id 'org.jlleitschuh.gradle.ktlint' version '11.0.0'
     id 'io.gitlab.arturbosch.detekt' version '1.22.0'
 }
@@ -57,6 +58,14 @@ android {
 }
 
 dependencies {
+
+    //region dagger
+    implementation libs.dagger
+    kapt libs.dagger.compiler
+    implementation libs.dagger.android
+    implementation libs.dagger.android.support
+    kapt libs.dagger.android.processor
+    //endregion
 
     //region network
     implementation network.okhttp3.logging.interceptor
