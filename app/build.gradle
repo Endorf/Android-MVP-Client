@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
     id 'org.jlleitschuh.gradle.ktlint' version '11.0.0'
     id 'io.gitlab.arturbosch.detekt' version '1.22.0'
 }
@@ -49,6 +50,13 @@ android {
 }
 
 dependencies {
+
+    //region network
+    implementation network.okhttp3.logging.interceptor
+    implementation network.gson
+    implementation network.retrofit2
+    implementation network.retrofit2.converter.gson
+    //endregion
 
     implementation libs.core.ktx
     implementation libs.material
