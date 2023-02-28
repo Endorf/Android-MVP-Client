@@ -4,22 +4,6 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'kotlin-android'
-    id 'org.jlleitschuh.gradle.ktlint' version '11.0.0'
-    id 'io.gitlab.arturbosch.detekt' version '1.22.0'
-}
-
-ktlint {
-    android.set(true)
-    outputColorName.set("RED")
-    outputToConsole.set(true)
-    disabledRules = ["final-newline"]
-}
-
-detekt {
-    buildUponDefaultConfig = true
-    parallel = true
-    config = files("$project.rootDir/.detekt/config.yml")
-    baseline = file("$project.rootDir/.detekt/detekt-baseline.xml")
 }
 
 kapt {
