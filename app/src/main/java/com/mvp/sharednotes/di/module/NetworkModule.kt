@@ -1,6 +1,8 @@
 package com.mvp.sharednotes.di.module
 
 import com.mvp.sharednotes.BuildConfig
+import com.mvp.sharednotes.data.api.UserApi
+import com.mvp.sharednotes.di.scope.AppScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -13,6 +15,9 @@ import java.util.concurrent.TimeUnit
 object NetworkModule {
 
     private const val TIMEOUT_SECONDS = 30L
+
+    @Provides
+    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
 
     @Provides
     fun provideRetrofit(httpClient: OkHttpClient): Retrofit = Retrofit.Builder()
@@ -29,6 +34,7 @@ object NetworkModule {
         .build()
 
     @Provides
+    @AppScope
     fun provideLoggingInterceptor() = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 }

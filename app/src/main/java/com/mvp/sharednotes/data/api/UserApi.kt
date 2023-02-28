@@ -1,18 +1,22 @@
 package com.mvp.sharednotes.data.api
 
 import com.mvp.sharednotes.data.entity.UserEntity
-import retrofit2.http.Body
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface UserApi {
 
-    @GET("users/{id}")
-    suspend fun get(@Path("id") id: Int): UserEntity
+    @GET(GET_ENDPOINT)
+    suspend fun get(@Path(ID) id: Int): UserEntity
 
-    @POST("user")
+    @POST(POST_ENDPOINT)
     @FormUrlEncoded
+    @Headers(CONTENT_TYPE_APPLICATION_JSON)
     suspend fun create(@Body user: UserEntity): UserEntity
+
+    private companion object {
+        const val ID = "id"
+        const val GET_ENDPOINT = "users/{$ID}"
+        const val POST_ENDPOINT = "user"
+        const val CONTENT_TYPE_APPLICATION_JSON = "Content-Type: application/json"
+    }
 }
