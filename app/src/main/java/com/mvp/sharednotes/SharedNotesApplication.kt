@@ -14,6 +14,5 @@ class SharedNotesApplication : Application() {
         appComponent = DaggerAppComponent.builder()
             .context(this)
             .build()
-
     }
 }

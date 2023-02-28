@@ -5,11 +5,11 @@ import com.mvp.sharednotes.data.api.UserApi
 import com.mvp.sharednotes.di.scope.AppScope
 import dagger.Module
 import dagger.Provides
+import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 @Module
 object NetworkModule {
