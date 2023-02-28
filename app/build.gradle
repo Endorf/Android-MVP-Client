@@ -6,10 +6,6 @@ plugins {
     id 'kotlin-android'
 }
 
-kapt {
-    correctErrorTypes true
-}
-
 android {
     namespace 'com.mvp.sharednotes'
     compileSdk 33
@@ -23,7 +19,14 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
         buildConfigField("String", "BASE_URL", "\"${getLocalProperty("BASE_URL")}\"")
+        buildConfigField("int", "DB_VERSION", "1")
     }
 
     buildTypes {
@@ -41,6 +44,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes true
+}
+
 dependencies {
 
     //region dagger
@@ -56,6 +63,11 @@ dependencies {
     implementation network.gson
     implementation network.retrofit2
     implementation network.retrofit2.converter.gson
+    //endregion
+
+    //region room
+    implementation storage.androidx.room
+    kapt storage.androidx.room.compiler
     //endregion
 
     implementation libs.core.ktx
