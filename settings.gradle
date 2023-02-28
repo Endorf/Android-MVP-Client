@@ -9,7 +9,7 @@ dependencyResolutionManagement {
     versionCatalogs {
         libs {
             library('core-ktx', 'androidx.core:core-ktx:1.9.0')
-            library('androidx-appcompat', 'androidx.appcompat:appcompat:1.5.1')
+            library('androidx-appcompat', 'androidx.appcompat:appcompat:1.6.1')
             library('material', 'com.google.android.material:material:1.8.0')
             library('androidx-constraintlayout', 'androidx.constraintlayout:constraintlayout:2.1.4')
             library('androidx-navigation-fragment-ktx', 'androidx.navigation:navigation-fragment-ktx:2.5.3')
@@ -19,7 +19,7 @@ dependencyResolutionManagement {
             library('dagger-compiler', 'com.google.dagger:dagger-compiler:2.45')
             library('dagger-android', 'com.google.dagger:dagger-android:2.35.1')
             library('dagger-android-support', 'com.google.dagger:dagger-android-support:2.45')
-            library('dagger-android-processor', 'com.google.dagger:dagger-android-processor:2.35.1')
+            library('dagger-android-processor', 'com.google.dagger:dagger-android-processor:2.45')
             //endregion
         }
         network {
