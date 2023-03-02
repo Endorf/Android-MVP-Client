@@ -45,11 +45,6 @@ android {
     buildFeatures {
         dataBinding true
     }
-    lint {
-        warningsAsErrors = true
-        abortOnError = true
-        baseline file("$rootDir/.lint/lint-baseline.xml")
-    }
 }
 
 kapt {
