@@ -1,4 +1,4 @@
-package com.mvp.sharednotes.data.storage.db.entity
+package com.mvp.sharednotes.data.repository.storage.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded

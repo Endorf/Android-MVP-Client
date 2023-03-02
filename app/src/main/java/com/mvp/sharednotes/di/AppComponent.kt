@@ -12,6 +12,8 @@ import dagger.Component
 @AppScope
 interface AppComponent {
 
+    fun routingComponent(): RoutingComponent.Builder
+
     @Component.Builder
     interface Builder {
 

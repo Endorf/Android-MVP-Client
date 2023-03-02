@@ -42,6 +42,9 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 kapt {
@@ -70,9 +73,20 @@ dependencies {
     kapt storage.androidx.room.compiler
     //endregion
 
+    //region datastore
+    implementation storage.androidx.datastore.preferences
+    implementation storage.androidx.datastore.preferences.rxjava3
+    //endregion
+
+    //region rx
+    implementation libs.rxjava3
+    implementation libs.rxjava3.android
+    //endregion
+
     implementation libs.core.ktx
     implementation libs.material
     implementation libs.androidx.appcompat
+    implementation libs.androidx.splashscreen
     implementation libs.androidx.constraintlayout
     implementation libs.androidx.navigation.fragment.ktx
     implementation libs.androidx.navigation.ui.ktx
