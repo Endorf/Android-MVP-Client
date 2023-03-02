@@ -1,4 +1,4 @@
-package com.mvp.sharednotes.data.entity
+package com.mvp.sharednotes.data.repository.storage.cloud.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

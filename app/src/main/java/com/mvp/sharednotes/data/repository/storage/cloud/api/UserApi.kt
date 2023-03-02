@@ -1,6 +1,6 @@
-package com.mvp.sharednotes.data.api
+package com.mvp.sharednotes.data.repository.storage.cloud.api
 
-import com.mvp.sharednotes.data.entity.UserEntity
+import com.mvp.sharednotes.data.repository.storage.cloud.entity.UserEntity
 import retrofit2.http.Body
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
