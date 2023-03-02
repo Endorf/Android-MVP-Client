@@ -1,7 +1,7 @@
 package com.mvp.sharednotes.di.module
 
 import com.mvp.sharednotes.BuildConfig
-import com.mvp.sharednotes.data.api.UserApi
+import com.mvp.sharednotes.data.repository.storage.cloud.api.UserApi
 import com.mvp.sharednotes.di.scope.AppScope
 import dagger.Module
 import dagger.Provides
