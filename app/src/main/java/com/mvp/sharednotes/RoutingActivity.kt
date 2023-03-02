@@ -48,12 +48,12 @@ class RoutingActivity : AppCompatActivity(), RoutingView {
     override fun onSuccessfulLogin() {
         splashScreen.setKeepOnScreenCondition { false }
         Toast.makeText(this, "onSuccessfulLogin", Toast.LENGTH_SHORT).show()
-        //TODO: show notes screen
+        // TODO: show notes screen
     }
 
     override fun onError(e: Throwable) {
         splashScreen.setKeepOnScreenCondition { false }
         Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
-        //TODO: show login screen
+        // TODO: show login screen
     }
 }
