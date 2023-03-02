@@ -15,10 +15,14 @@ jobs:
         uses: actions/setup-java@v1
         with: { java-version: 17 }
 
+      - name: Run Lint
+        run: |
+          ./gradlew lintDebug
+
       - name: Run Detekt
         run: |
           ./gradlew detekt
 
-      - name: Run Lint
+      - name: Run KtLint
         run: |
-          ./gradlew lintDebug
+          ./gradlew ktlintCheck
