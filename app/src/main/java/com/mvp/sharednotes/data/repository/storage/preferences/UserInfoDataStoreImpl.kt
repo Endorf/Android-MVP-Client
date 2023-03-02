@@ -60,4 +60,3 @@ class UserInfoDataStoreImpl @Inject constructor(
         val username = stringPreferencesKey(USERNAME)
     }
 }
-

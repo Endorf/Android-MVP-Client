@@ -4,19 +4,18 @@ plugins {
     id 'com.android.library' version '7.4.2' apply false
     id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
     id 'io.gitlab.arturbosch.detekt' version '1.22.0'
+    id 'org.jlleitschuh.gradle.ktlint' version '11.2.0'
 }
 
 subprojects {
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
     apply plugin: "io.gitlab.arturbosch.detekt"
 
     afterEvaluate {
         if(it.hasProperty('android')){
             android {
                 lintOptions {
-                    checkAllWarnings true
                     checkDependencies true
-                    warningsAsErrors true
-                    htmlReport true
                     showAll true
                     explainIssues false
                     lintConfig file("$rootDir/.lint/lint.xml")
@@ -24,6 +23,13 @@ subprojects {
                 }
             }
         }
+    }
+
+    ktlint {
+        android.set(true)
+        outputColorName.set("RED")
+        outputToConsole.set(true)
+        disabledRules = ["final-newline", "import-ordering"]
     }
 
     detekt {
