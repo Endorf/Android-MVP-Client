@@ -1,10 +1,10 @@
-package com.mvp.sharednotes.data.storage.db.dao
+package com.mvp.sharednotes.data.repository.storage.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.mvp.sharednotes.data.storage.db.entity.UserEntity
+import com.mvp.sharednotes.data.repository.storage.db.entity.UserEntity
 
 @Dao
 interface UserDao {

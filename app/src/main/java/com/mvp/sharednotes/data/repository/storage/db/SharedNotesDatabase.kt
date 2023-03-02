@@ -1,10 +1,10 @@
-package com.mvp.sharednotes.data.storage.db
+package com.mvp.sharednotes.data.repository.storage.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.mvp.sharednotes.BuildConfig
-import com.mvp.sharednotes.data.storage.db.dao.UserDao
-import com.mvp.sharednotes.data.storage.db.entity.UserEntity
+import com.mvp.sharednotes.data.repository.storage.db.dao.UserDao
+import com.mvp.sharednotes.data.repository.storage.db.entity.UserEntity
 
 @Database(
     version = BuildConfig.DB_VERSION,
