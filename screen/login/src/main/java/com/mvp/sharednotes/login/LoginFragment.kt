@@ -26,7 +26,8 @@ class LoginFragment : Fragment(), LoginView {
 
         // todo: remove it
         presenter = PresenterImpl(this)
-        inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager = requireActivity()
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
     override fun onCreateView(
