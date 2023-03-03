@@ -53,6 +53,10 @@ kapt {
 
 dependencies {
 
+    //region application modules
+    implementation projects.screen.login
+    //endregion
+
     //region dagger
     implementation libs.dagger
     kapt libs.dagger.compiler
