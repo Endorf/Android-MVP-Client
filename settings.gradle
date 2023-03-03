@@ -12,6 +12,7 @@ dependencyResolutionManagement {
             library('androidx-appcompat', 'androidx.appcompat:appcompat:1.6.1')
             library('material', 'com.google.android.material:material:1.8.0')
             library('androidx-constraintlayout', 'androidx.constraintlayout:constraintlayout:2.1.4')
+            library('androidx-fragment-ktx', 'androidx.fragment:fragment-ktx:1.5.5')
             library('androidx-navigation-fragment-ktx', 'androidx.navigation:navigation-fragment-ktx:2.5.3')
             library('androidx-navigation-ui-ktx', 'androidx.navigation:navigation-ui-ktx:2.5.3')
             library('androidx-splashscreen', 'androidx.core:core-splashscreen:1.0.0')
@@ -57,6 +58,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Shared Notes"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+rootProject.name = "SharedNotes"
 include ':app'
 include ':screen:login'
