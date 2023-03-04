@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.rxjava3.rxPreferencesDataStore
 import androidx.datastore.rxjava3.RxDataStore
-import com.mvp.sharednotes.view.exception.UserNotExistsException
+import com.mvp.sharednotes.view.exception.UserNotExistsDataStoreException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -37,7 +37,7 @@ class UserInfoDataStoreImpl @Inject constructor(
         .observeOn(AndroidSchedulers.mainThread())
 
     private fun parseUserEntity(preferences: Preferences): UserEntity {
-        if (!preferences.contains(email)) throw UserNotExistsException()
+        if (!preferences.contains(email)) throw UserNotExistsDataStoreException()
 
         return UserEntity(
             preferences[email],
