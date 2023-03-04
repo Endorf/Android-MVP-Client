@@ -1,6 +1,5 @@
 package com.mvp.sharednotes.login
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment
 import com.mvp.sharednotes.login.databinding.FragmentLoginBinding
 import com.mvp.sharednotes.login.di.LoginComponentProvider
 import com.mvp.sharednotes.login.view.Presenter
-import com.mvp.sharednotes.login.view.PresenterImpl
 import com.mvp.sharednotes.login.view.entity.UserCredentials
 import com.mvp.sharednotes.login.view.entity.state.ErrorState
 import com.mvp.sharednotes.login.view.entity.state.ProgressState
@@ -34,10 +32,9 @@ class LoginFragment : Fragment(), LoginView {
 
         (requireActivity().application as LoginComponentProvider)
             .provideLoginComponent()
+            .view(this)
+            .build()
             .inject(this)
-
-//        inputMethodManager = requireActivity()
-//            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
     override fun onCreateView(
