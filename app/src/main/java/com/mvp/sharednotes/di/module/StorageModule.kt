@@ -2,16 +2,22 @@ package com.mvp.sharednotes.di.module
 
 import android.content.Context
 import androidx.room.Room
+import com.mvp.sharednotes.data.repository.LoginRepositoryImpl
 import com.mvp.sharednotes.data.repository.storage.db.SharedNotesDatabase
 import com.mvp.sharednotes.data.repository.storage.preferences.UserInfoDataStore
 import com.mvp.sharednotes.data.repository.storage.preferences.UserInfoDataStoreImpl
 import com.mvp.sharednotes.di.scope.AppScope
+import com.mvp.sharednotes.login.domain.LoginRepository
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Module
 class StorageModule {
+
+    @Provides
+    fun provideLoginRepository(dataStore: UserInfoDataStore): LoginRepository =
+        LoginRepositoryImpl(dataStore)
 
     @Provides
     @AppScope
