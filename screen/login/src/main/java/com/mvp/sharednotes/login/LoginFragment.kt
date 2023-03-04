@@ -11,26 +11,33 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mvp.sharednotes.login.databinding.FragmentLoginBinding
+import com.mvp.sharednotes.login.di.LoginComponentProvider
 import com.mvp.sharednotes.login.view.Presenter
 import com.mvp.sharednotes.login.view.PresenterImpl
 import com.mvp.sharednotes.login.view.entity.UserCredentials
 import com.mvp.sharednotes.login.view.entity.state.ErrorState
 import com.mvp.sharednotes.login.view.entity.state.ProgressState
+import javax.inject.Inject
 
 class LoginFragment : Fragment(), LoginView {
 
-    private lateinit var presenter: Presenter
-    private lateinit var inputMethodManager: InputMethodManager
+    @Inject
+    lateinit var presenter: Presenter
+
+    @Inject
+    lateinit var inputMethodManager: InputMethodManager
 
     private lateinit var binding: FragmentLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // todo: remove it
-        presenter = PresenterImpl(this)
-        inputMethodManager = requireActivity()
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        (requireActivity().application as LoginComponentProvider)
+            .provideLoginComponent()
+            .inject(this)
+
+//        inputMethodManager = requireActivity()
+//            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
     override fun onCreateView(
@@ -60,6 +67,7 @@ class LoginFragment : Fragment(), LoginView {
     }
 
     private fun initiateLogin() {
+        inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
         UserCredentials(
             binding.emailField.toString()
         ).let {
