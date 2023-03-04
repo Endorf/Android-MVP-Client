@@ -5,7 +5,7 @@ import com.mvp.sharednotes.di.module.AppModule
 import com.mvp.sharednotes.di.module.NetworkModule
 import com.mvp.sharednotes.di.module.StorageModule
 import com.mvp.sharednotes.di.scope.AppScope
-import com.mvp.sharednotes.login.ParentComponent
+import com.mvp.sharednotes.login.di.component.ParentLoginComponent
 import dagger.BindsInstance
 import dagger.Component
 
@@ -13,7 +13,7 @@ import dagger.Component
     modules = [AppModule::class, NetworkModule::class, StorageModule::class]
 )
 @AppScope
-interface AppComponent : ParentComponent {
+interface AppComponent : ParentLoginComponent {
 
     fun routingComponent(): RoutingComponent.Builder
 
