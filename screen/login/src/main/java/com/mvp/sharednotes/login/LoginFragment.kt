@@ -66,7 +66,7 @@ class LoginFragment : Fragment(), LoginView {
     private fun initiateLogin() {
         inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
         UserCredentials(
-            binding.emailField.toString()
+            binding.emailField.text.toString()
         ).let {
             presenter.login(it)
         }

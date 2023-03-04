@@ -1,7 +1,10 @@
 package com.mvp.sharednotes.login.view
 
+import android.util.Patterns
 import com.mvp.sharednotes.login.LoginView
 import com.mvp.sharednotes.login.view.entity.UserCredentials
+import com.mvp.sharednotes.login.view.exception.EmailNotValidException
+import com.mvp.sharednotes.login.view.exception.NoInputException
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -12,10 +15,35 @@ class PresenterImpl @Inject constructor(
     private var disposable = CompositeDisposable()
 
     override fun login(credential: UserCredentials) {
-        view.onLoadingStart()
+        val validationStatus = validateUserInput(credential, view::onError)
+        if (validationStatus) {
+            view.onLoadingStart()
+        }
     }
 
     override fun destroy() {
         disposable.dispose()
+    }
+
+    companion object {
+
+        private fun isEmailValid(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
+        private inline fun validateUserInput(
+            credential: UserCredentials,
+            onError: (Throwable) -> Unit
+        ): Boolean {
+            return when {
+                credential.email.isBlank() -> {
+                    onError(NoInputException())
+                    false
+                }
+                isEmailValid(credential.email).not() -> {
+                    onError(EmailNotValidException())
+                    false
+                }
+                else -> true
+            }
+        }
     }
 }
