@@ -2,7 +2,6 @@ package com.mvp.sharednotes.data.repository
 
 import com.mvp.sharednotes.data.repository.storage.preferences.UserEntity
 import com.mvp.sharednotes.data.repository.storage.preferences.UserInfoDataStore
-import com.mvp.sharednotes.login.domain.LoginRepository
 import com.mvp.sharednotes.login.view.entity.User
 import com.mvp.sharednotes.login.view.entity.UserCredentials
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

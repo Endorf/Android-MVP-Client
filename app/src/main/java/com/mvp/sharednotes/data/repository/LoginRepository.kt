@@ -1,4 +1,4 @@
-package com.mvp.sharednotes.login.domain
+package com.mvp.sharednotes.data.repository
 
 import com.mvp.sharednotes.login.view.entity.User
 import com.mvp.sharednotes.login.view.entity.UserCredentials

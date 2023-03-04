@@ -2,6 +2,7 @@ package com.mvp.sharednotes.di
 
 import android.content.Context
 import com.mvp.sharednotes.di.module.AppModule
+import com.mvp.sharednotes.di.module.LoginDomainModule
 import com.mvp.sharednotes.di.module.NetworkModule
 import com.mvp.sharednotes.di.module.StorageModule
 import com.mvp.sharednotes.di.scope.AppScope
@@ -10,7 +11,7 @@ import dagger.BindsInstance
 import dagger.Component
 
 @Component(
-    modules = [AppModule::class, NetworkModule::class, StorageModule::class]
+    modules = [AppModule::class, NetworkModule::class, LoginDomainModule::class, StorageModule::class]
 )
 @AppScope
 interface AppComponent : ParentLoginComponent {
