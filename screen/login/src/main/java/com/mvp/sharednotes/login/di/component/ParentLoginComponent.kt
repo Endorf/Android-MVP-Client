@@ -4,6 +4,5 @@ import android.view.inputmethod.InputMethodManager
 
 interface ParentLoginComponent {
 
-    fun vas(): InputMethodManager
-
+    fun getInputMethodManager(): InputMethodManager
 }

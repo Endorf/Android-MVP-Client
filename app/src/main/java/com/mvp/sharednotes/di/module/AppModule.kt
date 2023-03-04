@@ -10,6 +10,6 @@ import dagger.Provides
 class AppModule {
 
     @Provides
-    fun provideIM(context: Context): InputMethodManager =
+    fun provideInputMethodManager(context: Context): InputMethodManager =
         context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 }
