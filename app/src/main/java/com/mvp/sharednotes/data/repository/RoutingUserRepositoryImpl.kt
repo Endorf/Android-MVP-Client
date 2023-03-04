@@ -11,4 +11,5 @@ class RoutingUserRepositoryImpl @Inject constructor(
     override fun get() = dataStore.get()
 
     override fun create(user: UserEntity) = dataStore.create(user)
+        .ignoreElement()
 }

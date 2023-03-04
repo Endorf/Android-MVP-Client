@@ -22,7 +22,11 @@ class LoginRepositoryImpl @Inject constructor(
 
     override fun create(user: UserCredentials): Single<User> {
         val userEntity = UserEntity(user.email)
-        return dataStore.create(userEntity).toSingleDefault(MOCK)
+        return dataStore.create(userEntity).map {
+            // fixme make UserEntity not Nullable
+//            User(it.email!!, it.name, it.userName)
+            MOCK
+        }
     }
 
     companion object {

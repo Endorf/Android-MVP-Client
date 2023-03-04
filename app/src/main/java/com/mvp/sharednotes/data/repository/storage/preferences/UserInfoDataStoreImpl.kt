@@ -7,7 +7,6 @@ import androidx.datastore.preferences.rxjava3.rxPreferencesDataStore
 import androidx.datastore.rxjava3.RxDataStore
 import com.mvp.sharednotes.view.exception.UserNotExistsException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,7 +19,7 @@ class UserInfoDataStoreImpl @Inject constructor(
 
     private val Context.dataStore: RxDataStore<Preferences> by rxPreferencesDataStore(STORAGE_NAME)
 
-    override fun create(user: UserEntity): Completable =
+    override fun create(user: UserEntity): Single<UserEntity> =
         context.dataStore.updateDataAsync { preferences ->
             preferences.toMutablePreferences().apply {
                 user.email?.let { set(email, it) } ?: remove(email)
@@ -29,7 +28,7 @@ class UserInfoDataStoreImpl @Inject constructor(
             }
             return@updateDataAsync Single.just(preferences)
         }
-            .ignoreElement()
+            .map { user }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
