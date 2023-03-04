@@ -1,6 +1,5 @@
 package com.mvp.sharednotes.login.di.component
 
-import android.view.inputmethod.InputMethodManager
 import com.mvp.sharednotes.login.LoginFragment
 import com.mvp.sharednotes.login.LoginView
 import com.mvp.sharednotes.login.di.module.LoginModule
@@ -14,8 +13,6 @@ import dagger.Component
 )
 @LoginScope
 interface LoginComponent {
-
-    fun inputMethod(): InputMethodManager
 
     @Component.Builder
     interface Builder {
