@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LoginInteractorImpl @Inject constructor(
     private val repository: LoginRepository,
-) : Interactor {
+) : LoginInteractor {
 
     override fun login(credentials: UserCredentials): Single<User> {
         return repository.get(credentials)

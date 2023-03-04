@@ -2,7 +2,7 @@ package com.mvp.sharednotes.login.view
 
 import android.util.Patterns
 import com.mvp.sharednotes.login.LoginView
-import com.mvp.sharednotes.login.domain.Interactor
+import com.mvp.sharednotes.login.domain.LoginInteractor
 import com.mvp.sharednotes.login.view.entity.UserCredentials
 import com.mvp.sharednotes.login.view.exception.EmailNotValidException
 import com.mvp.sharednotes.login.view.exception.NoInputException
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class PresenterImpl @Inject constructor(
     private val view: LoginView,
-    private val interactor: Interactor
+    private val interactor: LoginInteractor
 ) : Presenter {
 
     private var disposable = CompositeDisposable()
