@@ -1,6 +1,7 @@
 package com.mvp.sharednotes.login.view
 
 import com.mvp.sharednotes.login.LoginView
+import com.mvp.sharednotes.login.view.entity.UserCredentials
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class PresenterImpl(
@@ -9,7 +10,7 @@ class PresenterImpl(
 
     private var disposable = CompositeDisposable()
 
-    override fun login() {
+    override fun login(credential: UserCredentials) {
         view.onLoadingStart()
         view.onSuccessfulLogin()
         view.onLoadingFinish()

@@ -5,21 +5,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mvp.sharednotes.login.databinding.FragmentLoginBinding
 import com.mvp.sharednotes.login.view.Presenter
 import com.mvp.sharednotes.login.view.PresenterImpl
+import com.mvp.sharednotes.login.view.entity.UserCredentials
 import com.mvp.sharednotes.login.view.entity.state.ErrorState
 import com.mvp.sharednotes.login.view.entity.state.ProgressState
 
 class LoginFragment : Fragment(), LoginView {
 
     private lateinit var presenter: Presenter
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var inputMethodManager: InputMethodManager
 
-    internal lateinit var inputMethodManager: InputMethodManager
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,6 @@ class LoginFragment : Fragment(), LoginView {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-        binding.presenter = presenter
         binding.progressState = ProgressState(false)
 
         return binding.root
@@ -45,9 +47,24 @@ class LoginFragment : Fragment(), LoginView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.emailField.addTextChangedListener {
-//            binding.emailInputLayout.error = null
-//        }
+        binding.loginBtn.setOnClickListener { initiateLogin() }
+
+        binding.emailField.apply {
+            addTextChangedListener { binding.emailInputLayout.error = null }
+
+            setOnEditorActionListener { _, actionId, _ ->
+                actionId == EditorInfo.IME_ACTION_DONE
+                    .also { initiateLogin() }
+            }
+        }
+    }
+
+    private fun initiateLogin() {
+        UserCredentials(
+            binding.emailField.toString()
+        ).let {
+            presenter.login(it)
+        }
     }
 
     override fun onDestroy() {
