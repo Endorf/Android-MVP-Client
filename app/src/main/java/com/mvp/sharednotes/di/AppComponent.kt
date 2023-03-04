@@ -5,12 +5,15 @@ import com.mvp.sharednotes.di.module.AppModule
 import com.mvp.sharednotes.di.module.NetworkModule
 import com.mvp.sharednotes.di.module.StorageModule
 import com.mvp.sharednotes.di.scope.AppScope
+import com.mvp.sharednotes.login.ParentComponent
 import dagger.BindsInstance
 import dagger.Component
 
-@Component(modules = [AppModule::class, NetworkModule::class, StorageModule::class])
+@Component(
+    modules = [AppModule::class, NetworkModule::class, StorageModule::class]
+)
 @AppScope
-interface AppComponent {
+interface AppComponent : ParentComponent {
 
     fun routingComponent(): RoutingComponent.Builder
 
