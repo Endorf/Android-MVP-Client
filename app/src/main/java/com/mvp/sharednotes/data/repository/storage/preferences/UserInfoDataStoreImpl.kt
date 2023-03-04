@@ -29,8 +29,6 @@ class UserInfoDataStoreImpl @Inject constructor(
             return@updateDataAsync Single.just(preferences)
         }
             .map { user }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
 
     override fun get(): Single<UserEntity> = context.dataStore.data()
         .map(::parseUserEntity)

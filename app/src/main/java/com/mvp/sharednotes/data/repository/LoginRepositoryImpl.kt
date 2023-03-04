@@ -5,7 +5,9 @@ import com.mvp.sharednotes.data.repository.storage.preferences.UserInfoDataStore
 import com.mvp.sharednotes.login.domain.LoginRepository
 import com.mvp.sharednotes.login.view.entity.User
 import com.mvp.sharednotes.login.view.entity.UserCredentials
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
@@ -18,6 +20,8 @@ class LoginRepositoryImpl @Inject constructor(
                 // fixme make UserEntity not Nullable
                 User(it.email!!, it.name, it.userName)
             }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun create(user: UserCredentials): Single<User> {
@@ -27,6 +31,8 @@ class LoginRepositoryImpl @Inject constructor(
 //            User(it.email!!, it.name, it.userName)
             MOCK
         }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     companion object {
