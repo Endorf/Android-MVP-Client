@@ -4,14 +4,14 @@ import android.view.inputmethod.InputMethodManager
 import com.mvp.sharednotes.login.LoginFragment
 import com.mvp.sharednotes.login.ParentComponent
 import com.mvp.sharednotes.login.di.module.LoginModule
-import com.mvp.sharednotes.login.di.scope.FragmentScope
+import com.mvp.sharednotes.login.di.scope.LoginScope
 import dagger.Component
 
 @Component(
     modules = [LoginModule::class],
     dependencies = [ParentComponent::class]
 )
-@FragmentScope
+@LoginScope
 interface LoginComponent {
 
     fun inputMethod(): InputMethodManager
