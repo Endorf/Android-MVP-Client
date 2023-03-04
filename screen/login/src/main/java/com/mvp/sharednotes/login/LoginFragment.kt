@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mvp.sharednotes.login.databinding.FragmentLoginBinding
 import com.mvp.sharednotes.login.di.LoginComponentProvider
 import com.mvp.sharednotes.login.view.Presenter
+import com.mvp.sharednotes.login.view.entity.User
 import com.mvp.sharednotes.login.view.entity.UserCredentials
 import com.mvp.sharednotes.login.view.entity.state.ErrorState
 import com.mvp.sharednotes.login.view.entity.state.ProgressState
@@ -90,8 +92,8 @@ class LoginFragment : Fragment(), LoginView {
         TODO("Not yet implemented")
     }
 
-    override fun onSuccessfulLogin() {
-        TODO("Not yet implemented")
+    override fun onSuccessfulLogin(user: User) {
+        Toast.makeText(requireContext(), "Entered as ${user.userName}", Toast.LENGTH_SHORT).show()
     }
 
     override fun onError(e: Throwable) {

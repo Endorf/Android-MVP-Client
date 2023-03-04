@@ -1,5 +1,7 @@
 package com.mvp.sharednotes.login
 
+import com.mvp.sharednotes.login.view.entity.User
+
 interface LoginView {
 
     fun onLoadingStart()
@@ -8,7 +10,7 @@ interface LoginView {
 
     fun userSignUpProcessing()
 
-    fun onSuccessfulLogin()
+    fun onSuccessfulLogin(user: User)
 
     fun onError(e: Throwable)
 }
