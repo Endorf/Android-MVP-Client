@@ -29,15 +29,43 @@ class SharedUserDataStore @Inject constructor(
             return@updateDataAsync Single.just(preferences)
         }.map { user }
 
-    // TODO: return specific user
-    override fun get(user: User): Single<User> = TODO("Not yet implemented")
+    override fun get(user: User): Single<User> = context.dataStore.data()
+        .map { preferences ->
+            parseUserEntity(preferences) {
+                when {
+                    !preferences.contains(email) -> UserNotExistsDataStoreException()
+                    preferences[email]!! == user.email -> UserNotExistsDataStoreException()
+                    else -> null
+                }
+            }
+        }.firstOrError()
 
     override fun get(): Single<User> = context.dataStore.data()
-        .map(::parseUserEntity)
+        .map { preferences ->
+            parseUserEntity(preferences) {
+                when {
+                    !preferences.contains(email) -> UserNotExistsDataStoreException()
+                    else -> null
+                }
+            }
+        }
         .firstOrError()
 
-    private fun parseUserEntity(preferences: Preferences): User {
-        if (!preferences.contains(email)) throw UserNotExistsDataStoreException()
+    override fun update(user: User): Single<User> =
+        context.dataStore.updateDataAsync { preferences ->
+            preferences.toMutablePreferences().apply {
+                set(email, user.email)
+                user.name?.let { set(name, it) } ?: remove(name)
+                user.userName?.let { set(username, it) } ?: remove(username)
+            }
+            return@updateDataAsync Single.just(preferences)
+        }.map { user }
+
+    private inline fun parseUserEntity(
+        preferences: Preferences,
+        validation: () -> Throwable?
+    ): User {
+        validation()?.let { throw it }
 
         return User(
             preferences[email]!!,
