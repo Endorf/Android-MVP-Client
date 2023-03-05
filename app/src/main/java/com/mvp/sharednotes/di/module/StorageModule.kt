@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.mvp.sharednotes.data.repository.storage.UserDataStore
 import com.mvp.sharednotes.data.repository.storage.db.SharedNotesDatabase
 import com.mvp.sharednotes.data.repository.storage.preferences.UserInfoDataStoreImpl
+import com.mvp.sharednotes.di.qualifier.Shared
 import com.mvp.sharednotes.di.scope.AppScope
 import dagger.Module
 import dagger.Provides
@@ -25,6 +26,7 @@ class StorageModule {
 
     @Provides
     @AppScope
+    @Shared
     @OptIn(ExperimentalCoroutinesApi::class)
     fun providePreferenceDataStore(context: Context): UserDataStore =
         UserInfoDataStoreImpl(context)

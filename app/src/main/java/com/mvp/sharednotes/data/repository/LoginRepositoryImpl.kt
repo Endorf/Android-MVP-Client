@@ -3,6 +3,7 @@ package com.mvp.sharednotes.data.repository
 import com.mvp.sharednotes.data.repository.storage.UserDataStore
 import com.mvp.sharednotes.data.repository.storage.cloud.api.UserApi
 import com.mvp.sharednotes.data.repository.storage.preferences.UserEntity
+import com.mvp.sharednotes.di.qualifier.Shared
 import com.mvp.sharednotes.login.view.entity.User
 import com.mvp.sharednotes.login.view.entity.UserCredentials
 import com.mvp.sharednotes.view.exception.UserNotExistsDataStoreException
@@ -12,7 +13,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
-    private val dataStore: UserDataStore,
+    @Shared private val dataStore: UserDataStore,
     private val api: UserApi
 ) : LoginRepository {
 
