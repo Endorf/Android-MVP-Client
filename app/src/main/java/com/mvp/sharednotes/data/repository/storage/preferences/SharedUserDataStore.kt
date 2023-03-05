@@ -3,7 +3,7 @@ package com.mvp.sharednotes.data.repository.storage.preferences
 import android.content.Context
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.rxjava3.rxPreferencesDataStore
+import androidx.datastore.preferences.rxjava3.RxPreferenceDataStoreBuilder
 import androidx.datastore.rxjava3.RxDataStore
 import com.mvp.sharednotes.data.entity.User
 import com.mvp.sharednotes.data.repository.storage.UserDataStore
@@ -14,22 +14,21 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class SharedUserDataStore @Inject constructor(
-    private val context: Context
+    context: Context
 ) : UserDataStore {
 
-    private val Context.dataStore: RxDataStore<Preferences> by rxPreferencesDataStore(STORAGE_NAME)
+    private var dataStore: RxDataStore<Preferences> =
+        RxPreferenceDataStoreBuilder(context, STORAGE_NAME).build()
 
     override fun create(user: User): Single<User> =
-        context.dataStore.updateDataAsync { preferences ->
-            preferences.toMutablePreferences().apply {
+        dataStore.updateDataAsync { preferences ->
+            val mutablePreferences = preferences.toMutablePreferences().apply {
                 set(email, user.email)
-                user.name?.let { set(name, it) } ?: remove(name)
-                user.userName?.let { set(username, it) } ?: remove(username)
             }
-            return@updateDataAsync Single.just(preferences)
+            Single.just(mutablePreferences)
         }.map { user }
 
-    override fun get(user: User): Single<User> = context.dataStore.data()
+    override fun get(user: User): Single<User> = dataStore.data()
         .map { preferences ->
             parseUserEntity(preferences) {
                 when {
@@ -40,7 +39,7 @@ class SharedUserDataStore @Inject constructor(
             }
         }.firstOrError()
 
-    override fun get(): Single<User> = context.dataStore.data()
+    override fun get(): Single<User> = dataStore.data()
         .map { preferences ->
             parseUserEntity(preferences) {
                 when {
@@ -52,13 +51,11 @@ class SharedUserDataStore @Inject constructor(
         .firstOrError()
 
     override fun update(user: User): Single<User> =
-        context.dataStore.updateDataAsync { preferences ->
-            preferences.toMutablePreferences().apply {
+        dataStore.updateDataAsync { preferences ->
+            val mutablePreferences = preferences.toMutablePreferences().apply {
                 set(email, user.email)
-                user.name?.let { set(name, it) } ?: remove(name)
-                user.userName?.let { set(username, it) } ?: remove(username)
             }
-            return@updateDataAsync Single.just(preferences)
+            Single.just(mutablePreferences)
         }.map { user }
 
     private inline fun parseUserEntity(
