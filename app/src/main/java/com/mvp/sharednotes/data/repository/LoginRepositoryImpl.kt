@@ -22,9 +22,11 @@ class LoginRepositoryImpl @Inject constructor(
     override fun get(credentials: UserCredentials): Single<User> =
         remoteDataStore.get(
             credentials.toUser()
-        ).doOnSuccess {
-            localDataStore.update(it).subscribe()
-            sharedDataStore.update(it).subscribe()
+        ).doOnSuccess { user ->
+            localDataStore.update(user).subscribe({}, {
+                localDataStore.create(user).subscribe().dispose()
+            }).dispose()
+            sharedDataStore.update(user).subscribe().dispose()
         }.map {
             it.toLoginUser()
         }
@@ -33,11 +35,11 @@ class LoginRepositoryImpl @Inject constructor(
 
     @Suppress()
     override fun create(credentials: UserCredentials): Single<User> =
-        localDataStore.create(
+        remoteDataStore.create(
             credentials.toUser()
         ).doOnSuccess {
-            localDataStore.create(it).subscribe()
-            sharedDataStore.create(it).subscribe()
+            localDataStore.create(it).subscribe().dispose()
+            sharedDataStore.create(it).subscribe().dispose()
         }.map {
             User(it.email, it.name, it.userName)
         }

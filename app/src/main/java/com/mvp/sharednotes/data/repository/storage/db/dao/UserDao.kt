@@ -12,6 +12,6 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg users: UserEntity)
 
-    @Update
-    fun update(vararg users: UserEntity): Int
+    @Query("UPDATE user SET name = :name, username = :username WHERE email = :email")
+    fun update(email: String, name: String?, username: String?): Int
 }

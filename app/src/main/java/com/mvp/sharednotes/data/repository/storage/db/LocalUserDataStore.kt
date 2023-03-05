@@ -28,7 +28,9 @@ class LocalUserDataStore @Inject constructor(
     override fun get(): Single<User> = TODO("Not yet implemented. ")
 
     override fun update(user: User): Single<User> = Single.create {
-        val id = database.update(user.toUserEntity())
+        val id = with(user.toUserEntity()) {
+            database.update(email, name, userName)
+        }
         when {
             id > 0 -> it.onSuccess(user)
             else -> it.onError(UserNotExistsDataStoreException())
