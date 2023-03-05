@@ -1,7 +1,7 @@
 package com.mvp.sharednotes.data.repository
 
+import com.mvp.sharednotes.data.entity.User
 import com.mvp.sharednotes.data.repository.storage.UserDataStore
-import com.mvp.sharednotes.data.repository.storage.preferences.UserEntity
 import com.mvp.sharednotes.di.qualifier.Shared
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -15,7 +15,7 @@ class RoutingUserRepositoryImpl @Inject constructor(
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 
-    override fun create(user: UserEntity) = dataStore.create(user)
+    override fun create(user: User) = dataStore.create(user)
         .ignoreElement()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

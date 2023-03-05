@@ -5,11 +5,10 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.rxjava3.rxPreferencesDataStore
 import androidx.datastore.rxjava3.RxDataStore
+import com.mvp.sharednotes.data.entity.User
 import com.mvp.sharednotes.data.repository.storage.UserDataStore
 import com.mvp.sharednotes.view.exception.UserNotExistsDataStoreException
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
@@ -20,28 +19,25 @@ class UserInfoDataStoreImpl @Inject constructor(
 
     private val Context.dataStore: RxDataStore<Preferences> by rxPreferencesDataStore(STORAGE_NAME)
 
-    override fun create(user: UserEntity): Single<UserEntity> =
+    override fun create(user: User): Single<User> =
         context.dataStore.updateDataAsync { preferences ->
             preferences.toMutablePreferences().apply {
-                user.email?.let { set(email, it) } ?: remove(email)
+                set(email, user.email)
                 user.name?.let { set(name, it) } ?: remove(name)
                 user.userName?.let { set(username, it) } ?: remove(username)
             }
             return@updateDataAsync Single.just(preferences)
-        }
-            .map { user }
+        }.map { user }
 
-    override fun get(): Single<UserEntity> = context.dataStore.data()
+    override fun get(): Single<User> = context.dataStore.data()
         .map(::parseUserEntity)
         .firstOrError()
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
 
-    private fun parseUserEntity(preferences: Preferences): UserEntity {
+    private fun parseUserEntity(preferences: Preferences): User {
         if (!preferences.contains(email)) throw UserNotExistsDataStoreException()
 
-        return UserEntity(
-            preferences[email],
+        return User(
+            preferences[email]!!,
             preferences[name],
             preferences[username]
         )
