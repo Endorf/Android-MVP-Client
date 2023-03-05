@@ -12,15 +12,22 @@ class RemoteUserDataStore @Inject constructor(
     private val api: UserApi
 ) : UserDataStore {
 
-    override fun create(user: User): Single<User> = Single.create {
-        api.create(user.toUserEntity())
-    }
+    override fun create(user: User): Single<User> = api.create(
+        user.toUserEntity()
+    ).map { it.toUser() }
 
-    override fun get(user: User): Single<User> = api.get(MOCK_ID).map { it.toUser() }
+    override fun get(user: User): Single<User> = api.get(
+        MOCK_ID
+    ).map { it.toUser() }
 
     override fun get(): Single<User> {
         TODO("Not yet implemented")
     }
+
+    override fun update(user: User): Single<User> = api.update(
+        MOCK_ID,
+        user.toUserEntity()
+    ).map { it.toUser() }
 
     companion object {
         private const val MOCK_ID = 1
