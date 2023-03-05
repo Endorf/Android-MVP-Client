@@ -6,7 +6,7 @@ import com.mvp.sharednotes.data.repository.storage.db.SharedNotesDatabase
 import com.mvp.sharednotes.data.repository.storage.db.dao.UserDao
 import com.mvp.sharednotes.data.repository.storage.UserDataStore
 import com.mvp.sharednotes.data.repository.storage.db.LocalUserDataStore
-import com.mvp.sharednotes.data.repository.storage.preferences.UserInfoDataStoreImpl
+import com.mvp.sharednotes.data.repository.storage.preferences.SharedUserDataStore
 import com.mvp.sharednotes.di.qualifier.Local
 import com.mvp.sharednotes.di.qualifier.Shared
 import com.mvp.sharednotes.di.scope.AppScope
@@ -41,5 +41,5 @@ class StorageModule {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Shared
     fun providePreferenceDataStore(context: Context): UserDataStore =
-        UserInfoDataStoreImpl(context)
+        SharedUserDataStore(context)
 }

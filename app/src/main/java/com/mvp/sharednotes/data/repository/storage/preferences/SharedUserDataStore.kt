@@ -13,7 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class UserInfoDataStoreImpl @Inject constructor(
+class SharedUserDataStore @Inject constructor(
     private val context: Context
 ) : UserDataStore {
 
