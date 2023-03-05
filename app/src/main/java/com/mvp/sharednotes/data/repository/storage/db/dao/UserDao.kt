@@ -1,9 +1,6 @@
 package com.mvp.sharednotes.data.repository.storage.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.mvp.sharednotes.data.repository.storage.db.entity.UserEntity
 
 @Dao
@@ -14,4 +11,7 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg users: UserEntity)
+
+    @Update
+    fun update(vararg users: UserEntity): Int
 }

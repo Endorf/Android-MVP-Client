@@ -5,6 +5,7 @@ import com.mvp.sharednotes.data.repository.storage.UserDataStore
 import com.mvp.sharednotes.data.repository.storage.db.dao.UserDao
 import com.mvp.sharednotes.data.repository.storage.db.entity.mapper.toUser
 import com.mvp.sharednotes.data.repository.storage.db.entity.mapper.toUserEntity
+import com.mvp.sharednotes.view.exception.UserNotExistsDataStoreException
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
@@ -25,4 +26,12 @@ class LocalUserDataStore @Inject constructor(
 
     // TODO: return all users
     override fun get(): Single<User> = TODO("Not yet implemented. ")
+
+    override fun update(user: User): Single<User> = Single.create {
+        val id = database.update(user.toUserEntity())
+        when {
+            id > 0 -> it.onSuccess(user)
+            else -> it.onError(UserNotExistsDataStoreException())
+        }
+    }
 }
