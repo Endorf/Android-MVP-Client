@@ -10,8 +10,8 @@ data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "row_id")
     val id: Int,
+    @ColumnInfo(name = "email") val email: String,
     @ColumnInfo(name = "username") val userName: String?,
     @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "email") val email: String?,
     @Embedded val address: AddressEmbeddedEntity? = null
 )

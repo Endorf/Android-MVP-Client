@@ -1,12 +1,12 @@
 package com.mvp.sharednotes
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.mvp.sharednotes.databinding.ActivityRoutingBinding
 import com.mvp.sharednotes.view.RoutingPresenter
 import javax.inject.Inject
@@ -47,13 +47,11 @@ class RoutingActivity : AppCompatActivity(), RoutingView {
 
     override fun onSuccessfulLogin() {
         splashScreen.setKeepOnScreenCondition { false }
-        Toast.makeText(this, "onSuccessfulLogin", Toast.LENGTH_SHORT).show()
-        // TODO: show notes screen
+        TODO("implement notes module")
     }
 
     override fun onError(e: Throwable) {
         splashScreen.setKeepOnScreenCondition { false }
-        Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
-        // TODO: show login screen
+        findNavController(R.id.nav_host_fragment_content_main)
     }
 }

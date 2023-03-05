@@ -1,10 +1,10 @@
 package com.mvp.sharednotes.di.module
 
-import com.mvp.sharednotes.view.RoutingPresenter
 import com.mvp.sharednotes.data.repository.RoutingUserRepository
-import com.mvp.sharednotes.di.scope.ActivityScope
-import com.mvp.sharednotes.view.RoutingPresenterImpl
 import com.mvp.sharednotes.data.repository.RoutingUserRepositoryImpl
+import com.mvp.sharednotes.view.RoutingPresenter
+import com.mvp.sharednotes.di.scope.RoutingScope
+import com.mvp.sharednotes.view.RoutingPresenterImpl
 import dagger.Binds
 import dagger.Module
 
@@ -12,10 +12,10 @@ import dagger.Module
 interface RoutingModule {
 
     @Binds
-    @ActivityScope
+    @RoutingScope
     fun bindPresenter(presenter: RoutingPresenterImpl): RoutingPresenter
 
     @Binds
-    @ActivityScope
+    @RoutingScope
     fun bindRepository(presenter: RoutingUserRepositoryImpl): RoutingUserRepository
 }

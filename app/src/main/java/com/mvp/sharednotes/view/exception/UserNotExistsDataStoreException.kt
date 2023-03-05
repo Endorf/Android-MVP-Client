@@ -1,6 +1,6 @@
 package com.mvp.sharednotes.view.exception
 
-class UserNotExistsException : NullPointerException(MESSAGE) {
+class UserNotExistsDataStoreException : NullPointerException(MESSAGE) {
 
     companion object {
         private const val MESSAGE = "User doesn't exists!"

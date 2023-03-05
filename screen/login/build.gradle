@@ -1,0 +1,66 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.mvp.sharednotes.login'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+dependencies {
+    //region dagger
+    implementation libs.dagger
+    kapt libs.dagger.compiler
+    implementation libs.dagger.android
+    implementation libs.dagger.android.support
+    kapt libs.dagger.android.processor
+    //endregion
+    //region rx
+    implementation libs.rxjava3
+    implementation libs.rxjava3.android
+    //endregion
+
+    implementation libs.core.ktx
+    implementation libs.material
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.fragment.ktx
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.androidx.navigation.ui.ktx
+
+    testImplementation testLibs.junit
+    androidTestImplementation testLibs.androidx.junit.ext
+    androidTestImplementation testLibs.androidx.espresso.core
+}
