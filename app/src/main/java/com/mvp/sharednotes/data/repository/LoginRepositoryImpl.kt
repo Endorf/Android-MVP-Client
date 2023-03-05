@@ -1,7 +1,7 @@
 package com.mvp.sharednotes.data.repository
 
 import com.mvp.sharednotes.data.repository.storage.UserDataStore
-import com.mvp.sharednotes.di.qualifier.Shared
+import com.mvp.sharednotes.di.qualifier.Local
 import com.mvp.sharednotes.login.view.entity.User
 import com.mvp.sharednotes.login.view.entity.UserCredentials
 import com.mvp.sharednotes.view.exception.UserNotExistsDataStoreException
@@ -13,13 +13,14 @@ import javax.inject.Inject
 typealias LocalUser = com.mvp.sharednotes.data.entity.User
 
 class LoginRepositoryImpl @Inject constructor(
-    @Shared private val dataStore: UserDataStore,
+    @Local private val dataStore: UserDataStore,
 ) : LoginRepository {
 
-    override fun get(user: UserCredentials): Single<User> {
-        return dataStore.get()
+    override fun get(credentials: UserCredentials): Single<User> {
+        val userEntity = LocalUser(credentials.email)
+
+        return dataStore.get(userEntity)
             .map {
-                // fixme make UserEntity not Nullable
                 User(it.email, it.name, it.userName)
             }.onErrorResumeNext {
                 when (it) {
@@ -32,8 +33,9 @@ class LoginRepositoryImpl @Inject constructor(
     }
 
     @Suppress()
-    override fun create(user: UserCredentials): Single<User> {
-        val userEntity = LocalUser(user.email)
+    override fun create(credentials: UserCredentials): Single<User> {
+        val userEntity = LocalUser(credentials.email)
+
         return dataStore.create(userEntity).map {
             // fixme make UserEntity not Nullable
 //            User(it.email!!, it.name, it.userName)

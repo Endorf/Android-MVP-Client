@@ -29,6 +29,9 @@ class UserInfoDataStoreImpl @Inject constructor(
             return@updateDataAsync Single.just(preferences)
         }.map { user }
 
+    // TODO: return specific user
+    override fun get(user: User): Single<User> = TODO("Not yet implemented")
+
     override fun get(): Single<User> = context.dataStore.data()
         .map(::parseUserEntity)
         .firstOrError()

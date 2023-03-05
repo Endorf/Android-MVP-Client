@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface LoginRepository {
 
-    fun get(user: UserCredentials): Single<User>
+    fun get(credentials: UserCredentials): Single<User>
 
-    fun create(user: UserCredentials): Single<User>
+    fun create(credentials: UserCredentials): Single<User>
 }
