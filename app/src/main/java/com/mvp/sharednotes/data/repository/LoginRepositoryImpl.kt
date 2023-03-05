@@ -16,7 +16,7 @@ import javax.inject.Inject
 class LoginRepositoryImpl @Inject constructor(
     @Local private val localDataStore: UserDataStore,
     @Remote private val remoteDataStore: UserDataStore,
-    @Shared private val sharedDataStore: UserDataStore,
+    @Shared private val sharedDataStore: UserDataStore
 ) : LoginRepository {
 
     override fun get(credentials: UserCredentials): Single<User> =
