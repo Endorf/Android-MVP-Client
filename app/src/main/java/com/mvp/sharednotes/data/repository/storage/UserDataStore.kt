@@ -7,5 +7,5 @@ interface UserDataStore {
 
     fun create(user: User): Single<User>
 
-    fun get(): Single<User>
+    fun get(user: User): Single<User>
 }
