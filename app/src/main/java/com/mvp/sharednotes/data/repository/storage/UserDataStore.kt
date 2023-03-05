@@ -10,4 +10,6 @@ interface UserDataStore {
     fun get(user: User): Single<User>
 
     fun get(): Single<User>
+
+    fun update(user: User): Single<User>
 }
