@@ -1,6 +1,9 @@
 package com.mvp.sharednotes.data.repository.storage.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import com.mvp.sharednotes.data.repository.storage.db.entity.UserEntity
 
 @Dao

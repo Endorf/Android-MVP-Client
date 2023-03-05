@@ -2,7 +2,12 @@ package com.mvp.sharednotes.data.repository.storage.cloud.api
 
 import com.mvp.sharednotes.data.repository.storage.cloud.entity.UserEntity
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.*
+import retrofit2.http.POST
+import retrofit2.http.GET
+import retrofit2.http.PATCH
+import retrofit2.http.Headers
+import retrofit2.http.Body
+import retrofit2.http.Path
 
 interface UserApi {
 
