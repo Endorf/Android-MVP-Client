@@ -11,7 +11,10 @@ import dagger.BindsInstance
 import dagger.Component
 
 @Component(
-    modules = [AppModule::class, NetworkModule::class, LoginDomainModule::class, StorageModule::class]
+    modules = [
+        AppModule::class, NetworkModule::class, StorageModule::class,
+        LoginDomainModule::class
+    ]
 )
 @AppScope
 interface AppComponent : ParentLoginComponent {

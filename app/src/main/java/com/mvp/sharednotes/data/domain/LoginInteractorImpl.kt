@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class LoginInteractorImpl @Inject constructor(
-    private val repository: LoginRepository,
+    private val repository: LoginRepository
 ) : LoginInteractor {
 
     override fun login(credentials: UserCredentials): Single<User> {
