@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.rxjava3.rxPreferencesDataStore
 import androidx.datastore.rxjava3.RxDataStore
+import com.mvp.sharednotes.data.repository.storage.UserDataStore
 import com.mvp.sharednotes.view.exception.UserNotExistsDataStoreException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 class UserInfoDataStoreImpl @Inject constructor(
     private val context: Context
-) : UserInfoDataStore {
+) : UserDataStore {
 
     private val Context.dataStore: RxDataStore<Preferences> by rxPreferencesDataStore(STORAGE_NAME)
 
