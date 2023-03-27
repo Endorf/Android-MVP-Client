@@ -37,7 +37,7 @@ dependencyResolutionManagement {
         }
         storage {
             //region room
-            library('androidx-room', 'androidx.room:room-runtime:2.5.0')
+            library('androidx-room', 'androidx.room:room-runtime:2.5.1')
             library('androidx-room-compiler', 'androidx.room:room-compiler:2.5.0')
             //endregion
             //region datastore
