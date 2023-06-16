@@ -8,7 +8,7 @@ pluginManagement {
 dependencyResolutionManagement {
     versionCatalogs {
         libs {
-            library('core-ktx', 'androidx.core:core-ktx:1.9.0')
+            library('core-ktx', 'androidx.core:core-ktx:1.10.0')
             library('androidx-appcompat', 'androidx.appcompat:appcompat:1.6.1')
             library('material', 'com.google.android.material:material:1.8.0')
             library('androidx-constraintlayout', 'androidx.constraintlayout:constraintlayout:2.1.4')
@@ -38,7 +38,7 @@ dependencyResolutionManagement {
         storage {
             //region room
             library('androidx-room', 'androidx.room:room-runtime:2.5.1')
-            library('androidx-room-compiler', 'androidx.room:room-compiler:2.5.0')
+            library('androidx-room-compiler', 'androidx.room:room-compiler:2.5.1')
             //endregion
             //region datastore
             library('androidx-datastore-preferences', 'androidx.datastore:datastore-preferences:1.0.0')
