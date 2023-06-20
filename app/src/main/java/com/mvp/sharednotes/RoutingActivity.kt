@@ -1,6 +1,9 @@
 package com.mvp.sharednotes
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.View
+import android.view.animation.AccelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -14,7 +17,9 @@ import javax.inject.Inject
 class RoutingActivity : AppCompatActivity(), RoutingView {
 
     private lateinit var binding: ActivityRoutingBinding
+
     private lateinit var splashScreen: SplashScreen
+    private var keepOnScreenCondition: Boolean = true
 
     @Inject
     lateinit var presenter: RoutingPresenter
@@ -41,17 +46,33 @@ class RoutingActivity : AppCompatActivity(), RoutingView {
         super.onDestroy()
     }
 
-    private fun initSplashScreen() = installSplashScreen().apply {
-        setKeepOnScreenCondition { true }
-    }
-
     override fun onSuccessfulLogin() {
-        splashScreen.setKeepOnScreenCondition { false }
+        keepOnScreenCondition = false
         TODO("implement notes module")
     }
 
     override fun onError(e: Throwable) {
-        splashScreen.setKeepOnScreenCondition { false }
+        keepOnScreenCondition = false
         findNavController(R.id.nav_host_fragment_content_main)
+    }
+
+    private fun initSplashScreen() = installSplashScreen().apply {
+        setKeepOnScreenCondition { keepOnScreenCondition }
+
+        setOnExitAnimationListener {
+            val fadeAnim = ObjectAnimator.ofFloat(
+                it.view,
+                View.ALPHA,
+                1f,
+                0f
+            )
+            fadeAnim.duration = ANIMATION_DURATION
+            fadeAnim.interpolator = AccelerateInterpolator()
+            fadeAnim.start()
+        }
+    }
+
+    companion object {
+        private const val ANIMATION_DURATION = 300L
     }
 }
