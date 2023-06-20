@@ -48,7 +48,7 @@ class RoutingActivity : AppCompatActivity(), RoutingView {
 
     override fun onSuccessfulLogin() {
         keepOnScreenCondition = false
-        TODO("implement notes module")
+        // TODO("implement notes module")
     }
 
     override fun onError(e: Throwable) {
