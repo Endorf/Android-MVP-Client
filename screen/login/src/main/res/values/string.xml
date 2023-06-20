@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shared Notes</string>
+    <string name="app_name">MVP</string>
 
     <string name="user_input_error">Field has input error</string>
 
