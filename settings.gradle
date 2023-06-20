@@ -15,7 +15,7 @@ dependencyResolutionManagement {
             library('androidx-fragment-ktx', 'androidx.fragment:fragment-ktx:1.6.0')
             library('androidx-navigation-fragment-ktx', 'androidx.navigation:navigation-fragment-ktx:2.5.3')
             library('androidx-navigation-ui-ktx', 'androidx.navigation:navigation-ui-ktx:2.5.3')
-            library('androidx-splashscreen', 'androidx.core:core-splashscreen:1.0.0')
+            library('androidx-splashscreen', 'androidx.core:core-splashscreen:1.0.1')
             //region dagger
             library('dagger', 'com.google.dagger:dagger:2.45')
             library('dagger-compiler', 'com.google.dagger:dagger-compiler:2.45')
