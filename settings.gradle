@@ -21,7 +21,7 @@ dependencyResolutionManagement {
             library('dagger-compiler', 'com.google.dagger:dagger-compiler:2.45')
             library('dagger-android', 'com.google.dagger:dagger-android:2.45')
             library('dagger-android-support', 'com.google.dagger:dagger-android-support:2.45')
-            library('dagger-android-processor', 'com.google.dagger:dagger-android-processor:2.45')
+            library('dagger-android-processor', 'com.google.dagger:dagger-android-processor:2.48')
             //endregion
             //region rx
             library('rxjava3', 'io.reactivex.rxjava3:rxjava:3.1.6')
